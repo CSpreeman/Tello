@@ -17,7 +17,7 @@ class Tello:
 
         self.tello_ip = '192.168.10.1'
         self.tello_port = 8889
-        self.tello_adderss = (self.tello_ip, self.tello_port)
+        self.tello_address = (self.tello_ip, self.tello_port)
         self.log = []
 
         self.MAX_TIME_OUT = 15.0
@@ -34,7 +34,7 @@ class Tello:
         """
         self.log.append(Stats(command, len(self.log)))
 
-        self.socket.sendto(command.encode('utf-8'), self.tello_adderss)
+        self.socket.sendto(command.encode('utf-8'), self.tello_address)
         print 'sending command: %s to %s' % (command, self.tello_ip)
 
         start = time.time()
