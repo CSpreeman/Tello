@@ -68,8 +68,7 @@ class Validate:
                         print('Invalid value...')
             elif command == 'flip':
                 print('Please enter a direction to flip (l,r,f,b)....')
-                direction = raw_input()
-                direction = direction.rstrip().lower()
+                direction = raw_input().rstrip().lower()
                 if direction in valid_directions:
                     command += ' '
                     command += direction

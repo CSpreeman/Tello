@@ -6,8 +6,8 @@ import time
 
 start_time = time.strftime("%Y%m%d-%H%M%S")
 validate = Validate()
-#tello = Tello()
-#tello.send_command('command')
+tello = Tello()
+tello.send_command('command')
 
 while True:
     print('Please enter a command...')
@@ -29,15 +29,15 @@ while True:
 
     if valid:
         print('Valid ' + valid_command)
-        #tello.send_command(valid_command)
+        tello.send_command(valid_command)
     else:
         print('Invalid Command...')
 
-#log = tello.get_log()
-#out = open('C:/Users/Craig/Desktop/Tello-master/log/' + start_time + '.txt', 'w')
-#for stat in log:
-#    stat.print_stats()
-#    str = stat.return_stats()
-#    out.write(str)
+log = tello.get_log()
+out = open('C:/Users/Craig/Desktop/Tello-master/log/' + start_time + '.txt', 'w')
+for stat in log:
+    stat.print_stats()
+    str = stat.return_stats()
+    out.write(str)
 
 
