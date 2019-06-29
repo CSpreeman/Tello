@@ -20,6 +20,8 @@ while True:
             print('Entered command mode')
             mode = CommandMode(tello)
             mode.command_mode()
+        elif mode == 'exit':
+            break
     except:
         print('Invalid Command....')
 
