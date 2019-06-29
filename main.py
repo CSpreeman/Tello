@@ -1,37 +1,28 @@
-from tello import Tello
 import sys
-from datetime import datetime
-from validate_command import Validate
 import time
+from tello import Tello
+from datetime import datetime
+from command_mode import CommandMode
 
 start_time = time.strftime("%Y%m%d-%H%M%S")
-validate = Validate()
 tello = Tello()
 tello.send_command('command')
 
 while True:
-    print('Please enter a command...')
-    valid = False
-    ext = None
-    command = None
+    print('Available Modes: Free, Command')
+    print('Mode?....')
+    mode = raw_input().rstrip().lower()
+
     try:
-        command = raw_input().rstrip().lower()
-        if ' ' in command:
-            command, ext = command.split(' ')
-            ext = int(ext)
-
-        if command == 'exit':
-            break
-        valid, valid_command = validate.command(command, ext)
+        if mode == 'free':
+            print('Entered free mode')
+        elif mode == 'command':
+            print('Entered command mode')
+            mode = CommandMode(tello)
+            mode.command_mode()
     except:
-        valid = False
+        print('Invalid Command....')
 
-
-    if valid:
-        print('Valid ' + valid_command)
-        tello.send_command(valid_command)
-    else:
-        print('Invalid Command...')
 
 log = tello.get_log()
 out = open('C:/Users/Craig/Desktop/Tello-master/log/' + start_time + '.txt', 'w')
@@ -39,5 +30,3 @@ for stat in log:
     stat.print_stats()
     str = stat.return_stats()
     out.write(str)
-
-
