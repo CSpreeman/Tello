@@ -22,7 +22,7 @@ class Tello:
 
         self.MAX_TIME_OUT = 15.0
 
-    def send_command(self, command):
+    def send_command_await(self, command):
         """
         Send a command to the ip address. Will be blocked until
         the last command receives an 'OK'.
@@ -47,6 +47,21 @@ class Tello:
                 # now, next one got executed
                 return
         print 'Done!!! sent command: %s to %s' % (command, self.tello_ip)
+
+    def send_command(self, command):
+        """
+        Send a command to the ip address. Will be blocked until
+        the last command receives an 'OK'.
+        If the command fails (either b/c time out or error),
+        will try to resend the command
+        :param command: (str) the command to send
+        :param ip: (str) the ip of Tello
+        :return: The latest command response
+        """
+        self.log.append(Stats(command, len(self.log)))
+
+        self.socket.sendto(command.encode('utf-8'), self.tello_address)
+        print 'sending command: %s to %s' % (command, self.tello_ip)
 
     def _receive_thread(self):
         """Listen to responses from the Tello.

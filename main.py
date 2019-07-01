@@ -3,10 +3,11 @@ import time
 from tello import Tello
 from datetime import datetime
 from command_mode import CommandMode
+from free_mode import FreeMode
 
 start_time = time.strftime("%Y%m%d-%H%M%S")
 tello = Tello()
-tello.send_command('command')
+tello.send_command_await('command')
 
 while True:
     print('Available Modes: Free, Command')
@@ -16,6 +17,8 @@ while True:
     try:
         if mode == 'free':
             print('Entered free mode')
+            mode = FreeMode(tello)
+            mode.free_mode()
         elif mode == 'command':
             print('Entered command mode')
             mode = CommandMode(tello)

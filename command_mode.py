@@ -29,6 +29,6 @@ class CommandMode:
 
             if valid:
                 print('Valid ' + valid_command)
-                self.tello.send_command(valid_command)
+                self.tello.send_command_await(valid_command)
             else:
                 print('Invalid Command...')
