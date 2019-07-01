@@ -10,10 +10,11 @@ class Tello:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # socket for sending cmd
         self.socket.bind((self.local_ip, self.local_port))
 
-        # thread for receiving cmd ack
+        # thread for receiving cmd back
         self.receive_thread = threading.Thread(target=self._receive_thread)
         self.receive_thread.daemon = True
         self.receive_thread.start()
+        self.print_thread_response = True
 
         self.tello_ip = '192.168.10.1'
         self.tello_port = 8889
@@ -70,7 +71,8 @@ class Tello:
         while True:
             try:
                 self.response, ip = self.socket.recvfrom(1024)
-                print('from %s: %s' % (ip, self.response))
+                if self.print_thread_response:
+                    print('from %s: %s' % (ip, self.response))
 
                 self.log[-1].add_response(self.response)
             except socket.error, exc:

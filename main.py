@@ -17,6 +17,7 @@ while True:
     try:
         if mode == 'free':
             print('Entered free mode')
+            tello.print_thread_response = False
             mode = FreeMode(tello)
             mode.free_mode()
         elif mode == 'command':
