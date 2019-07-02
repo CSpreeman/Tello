@@ -4,6 +4,7 @@ from tello import Tello
 from datetime import datetime
 from command_mode import CommandMode
 from free_mode import FreeMode
+from tello_state import TelloState
 
 start_time = time.strftime("%Y%m%d-%H%M%S")
 tello = Tello()
